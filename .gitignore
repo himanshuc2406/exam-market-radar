@@ -1,0 +1,17 @@
+.env
+.env.*
+!.env.example
+credentials.json
+token.json
+rapidapi_key.txt
+**/keys.json
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.log
+*.db
+*.sqlite*
+output/
+suite_runs/
+backups/

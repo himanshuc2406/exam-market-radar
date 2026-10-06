@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exam Market Radar</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-icon">▶</span>
+      <div>
+        <div class="brand-name">Exam Market Radar</div>
+        <div class="brand-sub">Signals → tests → action</div>
+      </div>
+    </div>
+
+    <nav class="side-nav">
+      <button class="nav-btn active command-nav" data-tab="radar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v9l6 3"/><path d="M7 7l5 5"/><circle cx="12" cy="12" r="2"/></svg>
+        <span>Command Center</span>
+      </button>
+      <button class="nav-btn" data-tab="qbank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg>
+        <span>Test Factory</span>
+      </button>
+      <button class="nav-btn" data-tab="video">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="3"/><path d="M10 8.5l5.5 3.5L10 15.5z"/></svg>
+        <span>Video Intelligence</span>
+      </button>
+      <button class="nav-btn" data-tab="compare">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="7" height="15" rx="1.5"/><rect x="14" y="9" width="7" height="11" rx="1.5"/></svg>
+        <span>Channel Benchmark</span>
+      </button>
+      <button class="nav-btn" data-tab="trends">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 16l5.5-5.5 3.5 3.5L21 5"/><path d="M16 5h5v5"/></svg>
+        <span>Growth Tracker</span>
+      </button>
+      <button class="nav-btn" data-tab="research">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.2-4.2"/></svg>
+        <span>Market Explorer</span>
+      </button>
+      <button class="nav-btn" data-tab="transcript">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M8 13h8M8 17h6"/></svg>
+        <span>Transcript Tools</span>
+      </button>
+      <details class="advanced-nav">
+        <summary>More analysis tools <span>5</span></summary>
+        <div class="advanced-nav-list">
+          <button class="nav-btn" data-tab="doubts"><span>Doubt Radar</span></button>
+          <button class="nav-btn" data-tab="channel"><span>Channel Deep Dive</span></button>
+          <button class="nav-btn" data-tab="keywords"><span>Keyword Signals</span></button>
+          <button class="nav-btn" data-tab="viral"><span>Viral Outliers</span></button>
+          <button class="nav-btn" data-tab="gap"><span>Coverage Gap</span></button>
+        </div>
+      </details>
+    </nav>
+
+    <div class="side-foot">Exam Intelligence · v3</div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <main class="main">
+
+    <!-- ---------- MARKET COMMAND CENTER ---------- -->
+    <section class="tab active" id="tab-radar">
+      <div class="radar-title-row">
+        <div>
+          <span class="eyebrow">DAILY DECISION ENGINE</span>
+          <h1>Market Command Center</h1>
+          <p class="tab-desc">Detect early Quant &amp; Reasoning demand, find your coverage gaps, and get a ready-to-build quiz or mock recommendation—not another analytics report.</p>
+        </div>
+        <span class="live-badge"><i></i> Public market signals</span>
+      </div>
+
+      <div class="radar-controls">
+        <div class="radar-control-grid">
+          <label>Target exam
+            <select id="radarExam" class="main-select">
+              <option>SSC CGL</option>
+              <option>SSC CHSL</option>
+              <option>SSC CPO</option>
+              <option>Banking</option>
+              <option>RRB NTPC</option>
+              <option>Railway Group D</option>
+              <option>Defence</option>
+              <option>Teaching</option>
+            </select>
+          </label>
+          <label>Team
+            <select id="radarSubject" class="main-select">
+              <option value="both">Quant + Reasoning</option>
+              <option value="quant">Quant</option>
+              <option value="reasoning">Reasoning</option>
+            </select>
+          </label>
+          <label>Market window
+            <select id="radarDays" class="main-select">
+              <option value="7">Last 7 days</option>
+              <option value="30" selected>Last 30 days</option>
+              <option value="90">Last 90 days</option>
+            </select>
+          </label>
+          <label>Scan depth
+            <select id="radarScanMode" class="main-select">
+              <option value="quick">Quick · 4 topics</option>
+              <option value="standard" selected>Standard · 8 topics</option>
+              <option value="deep">Deep · 12 topics</option>
+            </select>
+          </label>
+          <label>Days to exam
+            <input id="radarExamDays" type="number" min="0" max="365" value="45" class="main-select">
+          </label>
+        </div>
+        <div class="radar-control-grid radar-control-wide">
+          <label>Your YouTube channel <span>optional, enables coverage-gap scoring</span>
+            <input id="radarChannel" class="main-input" placeholder="@yourchannel or channel URL">
+          </label>
+          <label>Custom topics <span>optional; replaces preset basket, follows scan depth</span>
+            <input id="radarTopics" class="main-input" placeholder="e.g. Percentage, Circular Seating, Coded Inequality">
+          </label>
+        </div>
+        <div class="radar-run-row">
+          <button class="btn radar-btn" id="runRadar">Scan market &amp; tell me what to build</button>
+          <button class="btn-ghost" id="runRadarDemo">Load pitch demo</button>
+          <p id="radarQuotaHint">Standard scan: 8 topics · approximately 816 API units · repeat scan cached for 30 minutes</p>
+        </div>
+      </div>
+      <div class="decision-flow" aria-label="Market-to-test workflow">
+        <div><b>1</b><span>Market signals</span></div><i>→</i>
+        <div><b>2</b><span>Ranked opportunity</span></div><i>→</i>
+        <div><b>3</b><span>Source video</span></div><i>→</i>
+        <div><b>4</b><span>Test Factory</span></div><i>→</i>
+        <div><b>5</b><span>Faculty review</span></div>
+      </div>
+      <div id="radarResult" class="result radar-result">
+        <div class="radar-empty">
+          <div class="radar-orb">◎</div>
+          <h2>One scan. One ranked action list.</h2>
+          <p>The app will combine recent view velocity, repeated doubts, test requests, competitor spread, your coverage and question-bank readiness.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- DOUBT RADAR ---------- -->
+    <section class="tab" id="tab-doubts">
+      <h1>Doubt Radar</h1>
+      <p class="tab-desc">Search a topic — it scans real student comments across the top videos, clusters them into the exact concepts students get stuck on, and hands you a ranked "make this next" content brief.</p>
+      <div class="input-row">
+        <input type="text" id="doubtQuery" class="main-input" placeholder="e.g. time speed distance ssc cgl, compound interest tricks">
+        <select id="doubtVideos" class="main-select">
+          <option value="8">Scan 8 videos</option>
+          <option value="12" selected>Scan 12 videos</option>
+          <option value="20">Scan 20 videos</option>
+        </select>
+        <button class="btn" id="runDoubts">Scan doubts</button>
+      </div>
+      <p class="tab-desc" style="font-size:12px;margin-top:-14px">~100 API units for search + 1 per video for comments · needs a Gemini key for clustering.</p>
+      <div id="doubtResult" class="result"></div>
+    </section>
+
+    <!-- ---------- TEST FACTORY ---------- -->
+    <section class="tab" id="tab-qbank">
+      <span class="eyebrow">SOURCE VIDEO → TEST DRAFT → FACULTY REVIEW</span>
+      <h1>Test Factory</h1>
+      <p class="tab-desc">Use a market-evidence video, your own class, or a playlist as the source. The app fetches the transcript, identifies question patterns and builds a deduped faculty-review draft bank.</p>
+
+      <div id="factorySourceNote" class="factory-source-note" style="display:none"></div>
+
+      <div class="gen-controls">
+        <input type="text" id="qbInput" class="main-input" placeholder="Paste a YouTube video URL, or playlist URL (…&amp;list=…)">
+        <div class="gen-row">
+          <label>Questions / video
+            <input type="number" id="qbCount" class="main-select" min="1" max="100" value="20" style="width:120px">
+          </label>
+          <label>Max videos (playlist)
+            <input type="number" id="qbMaxVideos" class="main-select" min="1" max="15" value="5" style="width:130px">
+          </label>
+          <label>Difficulty
+            <select id="qbDiff" class="main-select">
+              <option value="mixed" selected>Mixed</option>
+              <option value="easy">Easy</option>
+              <option value="medium">Medium</option>
+              <option value="hard">Hard</option>
+            </select>
+          </label>
+          <label>Language
+            <select id="qbLang" class="main-select">
+              <option>English</option><option>Hindi</option><option>Hinglish</option>
+            </select>
+          </label>
+        </div>
+        <input type="text" id="qbExam" class="main-input" placeholder="Exam / tag (optional) — e.g. SBI Clerk, SSC CGL, RRB NTPC">
+        <button class="btn" id="runQbank">Build faculty-review draft</button>
+        <p class="side-note" style="padding:0">The source transcript provides question patterns—not student praise comments. Every generated item is stored as a draft and must be academically reviewed before publishing.</p>
+      </div>
+      <div id="qbankBuildResult" class="result"></div>
+
+      <div class="bank-divider"><span>Faculty Review Bank</span></div>
+      <div class="bank-session-note"><b>Temporary review session</b><span>This bank resets whenever the page is refreshed. Download Excel or PDF before refreshing.</span></div>
+      <div id="qbankView" class="result"></div>
+    </section>
+
+    <!-- ---------- CONTENT GENERATOR ---------- -->
+    <section class="tab" id="tab-generate">
+      <h1>Content Generator</h1>
+      <p class="tab-desc">Turn a lecture, topic, or pasted text into ready-to-use MCQs and notes — export straight to your quiz platform.</p>
+
+      <div class="gen-controls">
+        <div class="seg" id="genMode">
+          <button class="seg-btn active" data-mode="topic">Topic</button>
+          <button class="seg-btn" data-mode="url">Video URL</button>
+          <button class="seg-btn" data-mode="text">Paste text</button>
+        </div>
+
+        <input type="text" id="genInput" class="main-input" placeholder="e.g. Simple Interest &amp; Compound Interest for SBI Clerk">
+        <textarea id="genTextarea" class="main-textarea" placeholder="Paste any content/notes here..." style="display:none"></textarea>
+
+        <div class="style-toggle">
+          <span class="style-label">Style</span>
+          <div class="seg" id="genStyle">
+            <button class="seg-btn active" data-style="fresh">Fresh questions</button>
+            <button class="seg-btn" data-style="mirror">Mirror — same pattern, changed values</button>
+          </div>
+        </div>
+
+        <div class="gen-row">
+          <label>Questions (max 100)
+            <input type="number" id="genCount" class="main-select" min="1" max="100" value="10" style="width:110px">
+          </label>
+          <label>Difficulty
+            <select id="genDiff" class="main-select">
+              <option value="easy">Easy</option>
+              <option value="medium">Medium</option>
+              <option value="hard">Hard</option>
+              <option value="mixed" selected>Mixed</option>
+            </select>
+          </label>
+          <label>Language
+            <select id="genLang" class="main-select">
+              <option>English</option>
+              <option>Hindi</option>
+              <option>Hinglish</option>
+            </select>
+          </label>
+        </div>
+        <input type="text" id="genExam" class="main-input" placeholder="Exam context (optional) — e.g. SBI Clerk, SSC CGL, RRB">
+        <button class="btn" id="runGenerate">Generate</button>
+      </div>
+      <div id="generateResult" class="result"></div>
+    </section>
+
+    <!-- ---------- VIDEO ANALYZER ---------- -->
+    <section class="tab" id="tab-video">
+      <h1>Video Analyzer</h1>
+      <p class="tab-desc">Paste a video URL to get stats, transcript, top comments, and the doubts students are asking.</p>
+      <div class="input-row">
+        <input type="text" id="videoUrl" class="main-input" placeholder="https://www.youtube.com/watch?v=...">
+        <button class="btn" id="analyzeVideo">Analyze</button>
+      </div>
+      <div id="videoResult" class="result"></div>
+    </section>
+
+    <!-- ---------- CHANNEL TRACKER ---------- -->
+    <section class="tab" id="tab-channel">
+      <h1>Channel Tracker</h1>
+      <p class="tab-desc">Track any channel — recent videos, views, engagement, and best performers.</p>
+      <div class="input-row">
+        <input type="text" id="channelQuery" class="main-input" placeholder="Channel URL, @handle, or name">
+        <select id="channelCount" class="main-select">
+          <option value="15">15 videos</option>
+          <option value="25" selected>25 videos</option>
+          <option value="50">50 videos</option>
+        </select>
+        <button class="btn" id="analyzeChannel">Track</button>
+      </div>
+      <div id="channelResult" class="result"></div>
+    </section>
+
+    <!-- ---------- COMPARE ---------- -->
+    <section class="tab" id="tab-compare">
+      <h1>Multi-Channel Comparison</h1>
+      <p class="tab-desc">Benchmark 2–5 channels side by side — subscribers, average views, engagement and posting cadence.</p>
+      <div class="gen-controls">
+        <textarea id="compareInput" class="main-textarea" placeholder="One channel per line (URL, @handle, or name) — 2 to 5 channels&#10;@channel1&#10;@channel2"></textarea>
+        <div class="gen-row" style="align-items:flex-end">
+          <label>Sample size
+            <select id="compareCount" class="main-select">
+              <option value="15">15 videos</option>
+              <option value="25" selected>25 videos</option>
+              <option value="40">40 videos</option>
+            </select>
+          </label>
+          <button class="btn" id="runCompare">Compare</button>
+        </div>
+      </div>
+      <div id="compareResult" class="result"></div>
+    </section>
+
+    <!-- ---------- TRENDS ---------- -->
+    <section class="tab" id="tab-trends">
+      <h1>Trend Tracking</h1>
+      <p class="tab-desc">Add channels to a watchlist and capture snapshots over time to chart real growth. Run "Capture snapshot" daily to build history.</p>
+      <div class="input-row">
+        <input type="text" id="trackInput" class="main-input" placeholder="Channel URL, @handle, or name to track">
+        <button class="btn" id="addTrack">Track</button>
+        <button class="btn-ghost" id="captureSnap" style="padding:13px 20px">Capture snapshot</button>
+      </div>
+      <div id="trendsResult" class="result"></div>
+    </section>
+
+    <!-- ---------- TOPIC RESEARCH ---------- -->
+    <section class="tab" id="tab-research">
+      <h1>Topic &amp; Competitor Research</h1>
+      <p class="tab-desc">Search a topic to see what's ranking, which channels dominate, and where the content gaps are.</p>
+      <div class="input-row">
+        <input type="text" id="researchQuery" class="main-input" placeholder="e.g. compound interest tricks, SBI clerk quant">
+        <select id="researchOrder" class="main-select">
+          <option value="relevance" selected>Relevance</option>
+          <option value="viewCount">Most viewed</option>
+          <option value="date">Newest</option>
+          <option value="rating">Top rated</option>
+        </select>
+        <button class="btn" id="runResearch">Research</button>
+      </div>
+      <div id="researchResult" class="result"></div>
+    </section>
+
+    <!-- ---------- KEYWORD RESEARCH ---------- -->
+    <section class="tab" id="tab-keywords">
+      <h1>Keyword Research</h1>
+      <p class="tab-desc">Enter a seed keyword to see related searches with demand, competition and an opportunity score — find high-demand, low-competition topics.</p>
+      <div class="input-row">
+        <input type="text" id="keywordSeed" class="main-input" placeholder="e.g. compound interest, ssc reasoning, current affairs">
+        <button class="btn" id="runKeywords">Research</button>
+      </div>
+      <p class="tab-desc" style="font-size:12px;margin-top:-14px">Checks up to 8 related keywords · uses ~800 API units per run.</p>
+      <div id="keywordResult" class="result"></div>
+    </section>
+
+    <!-- ---------- VIRAL FINDER ---------- -->
+    <section class="tab" id="tab-viral">
+      <h1>Viral Finder</h1>
+      <p class="tab-desc">Find videos that massively outperform their channel size — small channels with big hits. Learn what format or angle went viral.</p>
+      <div class="input-row">
+        <input type="text" id="viralQuery" class="main-input" placeholder="Topic / niche — e.g. ssc cgl maths, upsc current affairs">
+        <button class="btn" id="runViral">Scan</button>
+      </div>
+      <div id="viralResult" class="result"></div>
+    </section>
+
+    <!-- ---------- CONTENT GAP ---------- -->
+    <section class="tab" id="tab-gap">
+      <h1>Content Gap Finder</h1>
+      <p class="tab-desc">Compare your channel with a competitor to see the topics they cover — and rank on — that you haven't touched yet.</p>
+      <div class="gen-controls">
+        <div class="gen-row">
+          <label style="flex:1">Your channel
+            <input type="text" id="gapYours" class="main-input" placeholder="Your channel URL, @handle or name">
+          </label>
+          <label style="flex:1">Competitor
+            <input type="text" id="gapComp" class="main-input" placeholder="Competitor channel URL, @handle or name">
+          </label>
+        </div>
+        <button class="btn" id="runGap" style="width:fit-content">Find gaps</button>
+      </div>
+      <div id="gapResult" class="result"></div>
+    </section>
+
+    <!-- ---------- TRANSCRIPT TOOLS ---------- -->
+    <section class="tab" id="tab-transcript">
+      <h1>Transcript Tools</h1>
+      <p class="tab-desc">Extract a clean transcript in Hindi or English and download it in one click.</p>
+      <div class="input-row">
+        <input type="text" id="transcriptUrl" class="main-input" placeholder="https://www.youtube.com/watch?v=...">
+        <button class="btn" id="getTranscript">Get Transcript</button>
+      </div>
+      <div id="transcriptResult" class="result"></div>
+    </section>
+
+  </main>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>window.HAS_ENV_KEY = {{ 'true' if has_env_key else 'false' }};</script>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
